@@ -38,20 +38,20 @@ CREATE TABLE transaction (
 
 
 --Previewing tables to ensure data values, etc.
-SELECT *
-FROM credit_card;
-
-SELECT *
-FROM transaction;
-
 SELECT * 
 FROM card_holder;
+
+SELECT *
+FROM credit_card;
 
 SELECT * 
 FROM merchant_category;
 
 SELECT *
 FROM merchant;
+
+SELECT *
+FROM transaction;
 
 
 --Dropping Tables (if necessary)
