@@ -21,6 +21,7 @@ FROM transaction;
 
 --Part 1(a)
 --How can you isolate (or group) the transactions of each cardholder?
+CREATE VIEW group_transactions_each_cardholder AS
 SELECT card_holder.id AS "Card Holder ID", card_holder.name AS "Card Holder Name",
 COUNT(transaction.id) AS "Transactions"
 FROM card_holder
@@ -31,6 +32,7 @@ ORDER BY "Transactions" DESC;
 
 --Part 1(b)
 --Count the transactions that are less than $2.00 per cardholder.
+CREATE VIEW less_than_dollar_two AS
 SELECT transaction.card AS "Card", COUNT(transaction.amount) AS "Transaction Amount"
 FROM transaction
 WHERE transaction.amount < 2.00
