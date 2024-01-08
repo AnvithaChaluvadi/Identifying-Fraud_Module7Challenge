@@ -66,11 +66,4 @@ FROM transaction
 
 
 
-WHERE transaction.amount < 2.00
-
-
-
-
-
-
 
