@@ -39,6 +39,8 @@ WHERE transaction.amount < 2.00
 GROUP BY transaction.card, transaction.amount
 ORDER BY "Transaction Amount" DESC;
 
+SELECT*
+FROM less_than_dollar_two
 --Is there any evidence to suggest that a credit card has been hacked? Explain your rationale.
 --answer:
 
@@ -46,8 +48,19 @@ ORDER BY "Transaction Amount" DESC;
 
 --Part 1(c)
 --What are the top 100 highest transactions made between 7:00 am and 9:00 am?
-SELECT transaction.date, COUNT(transaction.amount),
+CREATE VIEW top_100_transactions_7_9 AS
+SELECT transaction.date, transaction.amount
 FROM transaction
+WHERE EXTRACT(HOUR FROM date) BETWEEN '07' AND '08'
+ORDER by amount DESC
+LIMIT 100;
+--Rest of the day
+CREATE VIEW top_100_transactions_rest AS
+SELECT transaction.date, transaction.amount
+FROM transaction
+WHERE EXTRACT(HOUR FROM date) NOT BETWEEN '07' AND '08'
+ORDER by amount DESC
+LIMIT 100;
 
 --Part 1(d)
 --Do you see any anomalous transactions that could be fraudulent?
@@ -57,8 +70,31 @@ FROM transaction
 --If you answered yes to the previous question, explain why you think there might be fraudulent transactions during this time frame.
 
 --What are the top 5 merchants prone to being hacked using small transactions?
+CREATE VIEW top_5_prone AS
+SELECT transaction.id_merchant AS "Merchant ID", COUNT(transaction.amount) as "Small Transactions"
+FROM transaction
+WHERE transaction.amount < 2
+GROUP BY transaction.id_merchant
+ORDER BY COUNT(transaction.amount) DESC
+LIMIT 5;
 
---Create a view for each of your queries.
+--Part 2
+--Your CFO has also requested detailed trends data on specific card holders. Use the starter notebook to query your database and generate visualizations that supply the requested information as follows, then add your visualizations and observations to your markdown report:
+--The two most important customers of the firm may have been hacked. Verify if there are any fraudulent transactions in their history. For privacy reasons, you only know that their cardholder IDs are 2 and 18.
+SELECT transaction.amount AS "Amount", credit_card.card AS "Credit Card", credit_card.cardholder_id AS "Cardholder ID"
+FROM transaction
+LEFT JOIN credit_card 
+ON transaction.card = credit_card.card
+WHERE credit_card.cardholder_id = 2 or credit_card.cardholder_id = 18;
+
+--The CEO of the biggest customer of the firm suspects that someone has used her corporate credit card without authorization in the first quarter of 2018 to pay quite expensive restaurant bills. Again, for privacy reasons, you know only that the cardholder ID in question is 25.
+--Daily transactions from jan to jun 2018 for card holder 25
+SELECT EXTRACT(MONTH FROM transaction.date) AS "Month", EXTRACT(DAY FROM transaction.date) AS "Date", transaction.amount AS "Amount"
+FROM transaction
+JOIN credit_card on credit_card.card = transaction.card
+JOIN card_holder on card_holder.id = credit_card.cardholder_id
+WHERE card_holder.id = 25 
+AND  EXTRACT(MONTH FROM transaction.date) <= 6;
 
 
 
