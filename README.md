@@ -87,16 +87,16 @@ I will apply my new SQL skills to analyze historical credit card transactions an
      <img src = Images/outlier.jpg width =60% height 30%=/>
      </p>
 
-* Are there any outliers for cardholder ID 25? How many outliers are there per month?
-    * Answer: The graph indicates that there are outliers in all months, but February.
-	    * Number of outliers:
-		    * January : 1
-			* March: 1
-			* April: 3
-			* May: 1
-			* June: 3
+    * Are there any outliers for cardholder ID 25? How many outliers are there per month?
+        * Answer: The graph indicates that there are outliers in all months, but February.
+            * Number of outliers:
+                * January : 1
+                * March: 1
+                * April: 3
+                * May: 1
+                * June: 3
 
-* Do you notice any anomalies? Describe your observations and conclusions.
-    * Answer: There are nine outliers recorded between January and June 2018. It's possible that fraudulent activities occurred in both the first and second quarters of 2018.
+    * Do you notice any anomalies? Describe your observations and conclusions.
+        * Answer: There are nine outliers recorded between January and June 2018. It's possible that fraudulent activities occurred in both the first and second quarters of 2018.
 
 
