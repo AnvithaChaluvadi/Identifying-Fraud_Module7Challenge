@@ -13,8 +13,9 @@ CREATE TABLE credit_card (
 );
 
 CREATE TABLE merchant_category (
-	id INT NOT NULL PRIMARY KEY, 
-	name VARCHAR (20)
+	id INT NOT NULL, 
+	name VARCHAR (20),
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE merchant (
